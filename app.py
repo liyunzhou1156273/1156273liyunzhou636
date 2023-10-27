@@ -484,7 +484,7 @@ def editrun_name():
         connection.execute("SELECT * FROM run WHERE dr_id = %s;", (current_Driverid[0],))
         new_run_list = connection.fetchall()
 
-        return render_template("editrunbyname.html",run_result=run_result,new_run_list=new_run_list)
+        return render_template("editrunbynamelist.html",run_result=run_result,new_run_list=new_run_list)
 
 # @app.route('/editrun_course', methods=["GET","POST"])
 # def editrun_course():
