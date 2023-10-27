@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<h2>Driver Run Details</h2>
+<br>
+
+
+<table class="table caption-top">
+    <thead>
+      <tr>
+        <th scope="col">Driver ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Run Number</th>
+        <th scope="col">Seconds</th>
+        <th scope="col">Cones</th>
+        <th scope="col">Wrong Direction(wd)</th>
+        <th scope="col">Course Name</th>
+        <th scope="col">Car Model</th>
+        <th scope="col">Drive Class</th>
+        <th scope="col">Run Totals</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in driver_result %}
+          <tr>
+              {% for item in row %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+          </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+
+<form>
+    <input type="button" value="Go back!" onclick="history.back()">
+</form>
+
+<br>
+<br>
+<br>
+<br>
+
+
+{% endblock %}

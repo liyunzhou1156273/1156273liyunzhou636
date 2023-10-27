@@ -1,0 +1,89 @@
+{% extends "admin.html" %}
+
+{% block content %}
+
+<br>
+<h2>Edit Runs by Name</h2>
+
+{{run_result}}
+
+<form id="select_form" name="select_form" action="/admin/editruns" method="POST">
+    <label>>-- Select Driver --</label>
+    <select name="selected_driver" id="selected_driver" onchange="this.form.submit()">    <!-- The onchange attribute is very simple Javascript to automatically submit the form when the selection changes -->
+        <option>&lt;Select A Driver&gt;</option>
+            {% for driver in driver_result %}
+                    {% if driver[0]==driverid %}
+                        <option value="{{driver[0]}}" selected>
+                            {{driver[0]}} {{driver[2]}} {{driver[1]}}
+                        </option>
+                    {% else %}
+                        <option value="{{driver[0]}}">
+                            {{driver[0]}} {{driver[2]}} {{driver[1]}}
+                        </option>
+                    {% endif %}
+            {% endfor %}
+    </select>
+</form>
+
+<!-- <button type="button" class="btn btn-primary"><a href="{{ url_for('edit_route', edit_id=edit_id) }}"></a>Edit this driver's run details</button> -->
+
+<table class="table caption-top">
+    <thead>
+        <tr>
+            <th scope="col">Driver ID</th>
+            <th scope="col">Course ID</th>
+            <th scope="col">Run Number</th>
+            <th scope="col">Seconds</th>
+            <th scope="col">Cones</th>
+            <th scope="col">Wrong Direction(wd)</th>
+          </tr>
+    </thead>
+    <tbody>
+      {% for row in run_result %}
+          <tr>
+              {% for item in row %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+
+          </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+<!-- <table>
+    <thead>
+        <tr>
+            <th>Driver</th>
+            <th>Run Num</th>
+            <th>Seconds</th>
+            <th>Cones</th>
+            <th>WD</th>
+        </tr>
+        </thead>
+    <tbody>
+        {% for run in user %}
+
+        <tr>
+            <td>{{ user.drivers }}</td>
+            <td>{{ user.run_num }}</td>
+            <td>
+                <input type="text" name="seconds_{{ user.dr_id }}" value="{{ user.seconds }}">
+            </td>
+            <td>
+                <input type="text" name="cones_{{ user.dr_id }}" value="{{ user.cones }}">
+            </td>
+            <td>
+                <input type="text" name="wd_{{ user.dr_id }}" value="{{ user.wd }}">
+            </td>
+        </tr>
+
+        {% endfor %}
+    </tbody> -->
+<!-- </table> -->
+
+<!-- Submit button for updating data -->
+<!-- <input type="submit" value="Update Data"> -->
+</form>
+
+
+{% endblock %}

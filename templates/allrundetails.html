@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<br>
+<h2>Driver Run Details</h2>
+<br>
+<form id="driver_form" name="driver_form" action="/listalldetails" method="post">
+
+  <p>
+      <label>Driver Run Details</label>
+      <select name="driver" id="driver" onchange="this.form.submit()">    <!-- The onchange attribute is very simple Javascript to automatically submit the form when the selection changes -->
+          <option>&lt;Select A Driver&gt;</option>
+            {% for driver in driver_result %}
+                  {% if driver[0]==driverid %}
+                      <option value="{{driver[0]}}" selected>
+                        {{driver[2]}} {{driver[1]}}
+                      </option>
+                  {% else %}
+                      <option value="{{driver[0]}}">
+                        {{driver[2]}} {{driver[1]}}
+                      </option>
+                  {% endif %}
+            {% endfor %}
+      </select>
+  </p>
+</form>
+
+<table class="table caption-top">
+    <thead>
+      <tr>
+        <th scope="col">Driver ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Run Number</th>
+        <th scope="col">Seconds</th>
+        <th scope="col">Cones</th>
+        <th scope="col">Wrong Direction(wd)</th>
+        <th scope="col">Course Name</th>
+        <th scope="col">Car Model</th>
+        <th scope="col">Drive Class</th>
+        <th scope="col">Run Totals</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in run_result %}
+          <tr>
+              {% for item in row %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+          </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}

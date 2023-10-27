@@ -1,0 +1,81 @@
+{% extends "admin.html" %}
+
+{% block content %}
+
+<br>
+<h2>Edit Runs</h2>
+{{run_result}}
+
+<form id="select_form" name="select_form" action="/admin/editruns" method="POST">
+    <p>
+        <label>-- Select --</label>
+        <select name="selected_driver" id="selected_driver" onchange="this.form.submit()">    <!-- The onchange attribute is very simple Javascript to automatically submit the form when the selection changes -->
+            <option>&lt;Select A Driver&gt;</option>
+            {% for driver in driver_result %}
+                    {% if driver[0]==driverid %}
+                        <option value="{{driver[0]}}" selected>
+                            {{driver[0]}} {{driver[2]}} {{driver[1]}}
+                        </option>
+                    {% else %}
+                        <option value="{{driver[0]}}">
+                            {{driver[0]}} {{driver[2]}} {{driver[1]}}
+                        </option>
+                    {% endif %}
+            {% endfor %}
+        </select>
+    </p>
+</form>
+
+
+
+{% for driver in driver_result %}
+        {% if driver[0]==driverid %}
+        <button type="button" class="btn btn-info"><a href="/editrun_route">Edit this driver's run details</a></button>
+        {% endif  %}
+{% endfor %}
+
+
+<!-- <a href="{{ url_for('edit_route', edit_id=edit_id) }}"></a> -->
+    <!-- <label for="selected_driver">Select Driver:</label>
+    <select name="selected_driver" id="selected_driver">
+        <option value="">-- Select Driver --</option>
+        {% for row in list_for_edit %}
+            <option value="{{ row.dr_id }}">{{ row.drivers }}</option>
+        {% endfor %}
+    </select> -->
+
+    <!-- <label for="selected_course">Select Course:</label>
+    <select name="selected_course" id="selected_course">
+        <option value="">-- Select Course --</option>
+        {% for course in courses %}
+            <option value="{{ course.course_id }}">{{ course.name }}</option>
+        {% endfor %}
+    </select> -->
+
+    <!-- <input type="submit" value="Select"> -->
+
+
+<table class="table caption-top">
+    <thead>
+      <tr>
+        <th scope="col">Driver ID</th>
+        <th scope="col">Course ID</th>
+        <th scope="col">Run Number</th>
+        <th scope="col">Seconds</th>
+        <th scope="col">Cones</th>
+        <th scope="col">Wrong Direction(wd)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in run_result %}
+          <tr>
+              {% for item in row %}
+                  <td>{{ item }}</td>
+              {% endfor %}
+
+          </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
