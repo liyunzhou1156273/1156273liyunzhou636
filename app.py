@@ -523,11 +523,13 @@ def adddriver():
             return render_template("adddriverform.html",caregiverList=caregiverList,age_confirmation=age_confirmation)  
         
         elif age_confirmation == "youngadult":  
+            
             # If the user clicks "17-25 yrs" in the dialog, it sets the age_confirmation variable to "youngadult".
             # Then, it renders the adddriverform.html template to gather additional information.
             return render_template("adddriverform.html",age_confirmation=age_confirmation)
         
         elif age_confirmation == "adult":  
+            
             # If the user clicks "Over 25 yrs" in the dialog, it sets the age_confirmation variable to "youngadult".
             # Then, it renders the adddriverform.html template to gather additional information.
             return render_template("adddriverform.html",age_confirmation=age_confirmation)  
@@ -536,29 +538,36 @@ def adddriver():
             # This part is executed when the user has provided the necessary driver information in the add new driverform from(adddriverform.html).
             driverID =request.form.get('driver_id')
             driverID=int(driverID)
-            firstName = request.form.get('first_name')
-            surname = request.form.get('surname')
-            dobget = request.form.get('dob')
-            dob= datetime.strptime(dobget, '%Y-%m-%d')
-
-            current_date = datetime.now()
-            age = current_date.year - dob.year - ((current_date.month, current_date.day) < (dob.month, dob.day))
-            caregiver = request.form.get('caregiver')
-            car = request.form.get('car')
 
             # Checking for empty values and replacing them with "None" as needed.
+            firstName = request.form.get('first_name')
             if firstName == "":
                 firstName = "None"
+            surname = request.form.get('surname')
             if surname == "":
                 surname = "None"
-            if dob == "":
-                dob = "None"
-            if age == "":
-                age = "None"
-            if caregiver == "":
-                caregiver = "None"
-            if car == "":
-                car = "None"
+
+            dobget = request.form.get('dob')
+            print(dobget)
+            if  dobget is not None and dobget != "None":
+                dob = datetime.strptime(dobget, '%Y-%m-%d')
+                current_date = datetime.now()
+                age = current_date.year - dob.year - ((current_date.month, current_date.day) < (dob.month, dob.day))
+
+            else:
+                dob=dobget
+                dob = None
+                age=request.form.get('age')
+                if age == "" or "None":
+                    age = None  
+             
+    
+            caregiver = request.form.get('caregiver')
+            if caregiver == "" or "None":
+                    caregiver = None  
+
+            car = request.form.get('car')
+        
             
             connection = getCursor()
             connection.execute("SELECT driver_id FROM driver;")
@@ -575,7 +584,7 @@ def adddriver():
                 new_driver_id=driverID
                 connection.execute("SELECT * FROM driver WHERE driver_id = %s;", (new_driver_id,))
                 new_driver_list=connection.fetchall()
-                return render_template("adddriverlist.html",age=age,caregiverList=caregiverList,new_driver_id=new_driver_id,new_driver_list=new_driver_list,sql_driver_id=sql_driver_id)
+                return render_template("adddriverlist.html",age=age,new_driver_id=new_driver_id,new_driver_list=new_driver_list,sql_driver_id=sql_driver_id)
             
             else:
                 flash('This ID already exists', 'error')
