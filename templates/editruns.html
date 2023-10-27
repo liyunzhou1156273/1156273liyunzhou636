@@ -2,13 +2,18 @@
 
 {% block content %}
 
+
+<!-- Amind Page -->
+
+
 <br>
 <h2>Edit Runs</h2>
-{{run_result}}
+<br>
 
+<!-- This is a select bar for user to choose a name for editing. The select bar options are from driver table in database.-->
 <form id="select_form" name="select_form" action="/admin/editruns" method="POST">
     <p>
-        <label>-- Select --</label>
+        <label>Select a driver to edit runs</label>
         <select name="selected_driver" id="selected_driver" onchange="this.form.submit()">    <!-- The onchange attribute is very simple Javascript to automatically submit the form when the selection changes -->
             <option>&lt;Select A Driver&gt;</option>
             {% for driver in driver_result %}
@@ -25,36 +30,17 @@
         </select>
     </p>
 </form>
+<!-- select button end -->
 
-
-
+<!-- When user select a certain name from the above select bar, that this code will be seen. This is a edit button -->
 {% for driver in driver_result %}
         {% if driver[0]==driverid %}
-        <button type="button" class="btn btn-info"><a href="/editrun_route">Edit this driver's run details</a></button>
+        <button type="button" class="btn btn-info"><a href="/editrun_name">Edit this driver's run details</a></button>
         {% endif  %}
 {% endfor %}
+<!-- button end -->
 
-
-<!-- <a href="{{ url_for('edit_route', edit_id=edit_id) }}"></a> -->
-    <!-- <label for="selected_driver">Select Driver:</label>
-    <select name="selected_driver" id="selected_driver">
-        <option value="">-- Select Driver --</option>
-        {% for row in list_for_edit %}
-            <option value="{{ row.dr_id }}">{{ row.drivers }}</option>
-        {% endfor %}
-    </select> -->
-
-    <!-- <label for="selected_course">Select Course:</label>
-    <select name="selected_course" id="selected_course">
-        <option value="">-- Select Course --</option>
-        {% for course in courses %}
-            <option value="{{ course.course_id }}">{{ course.name }}</option>
-        {% endfor %}
-    </select> -->
-
-    <!-- <input type="submit" value="Select"> -->
-
-
+<!-- This table shows all the run details of the driver that user chose from select bar. -->
 <table class="table caption-top">
     <thead>
       <tr>
@@ -77,5 +63,5 @@
       {% endfor %}
     </tbody>
 </table>
-
+<!-- Table end -->
 {% endblock %}

@@ -2,11 +2,14 @@
 
 {% block content %}
 
+
+<!-- Amind Page -->
+
 <br>
-<h2>Add Driver</h2>
+<h2>Add An New Driver</h2>
+<br>
 
-
-
+<!--This is a dialog, as   -->
 <div class="container"> 
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add New Driver</button>
     
@@ -22,9 +25,10 @@
                     <form method="POST" action="{{url_for('adddriver')}}">
                         <div class="overlay" id="dialogOverlay">
                             <div class="dialog">
-                                <h2>Is the new driver aged 12-25?</h2>
-                                <button type="submit" name="age_confirmation" value="yes">Yes</button>
-                                <button type="submit" name="age_confirmation" value="no">No</button>
+                                <h2>How old is the new driver?</h2>
+                                <button type="submit" name="age_confirmation" value="young">12-16 yrs</button>
+                                <button type="submit" name="age_confirmation" value="youngadult">17-25 yrs</button>
+                                <button type="submit" name="age_confirmation" value="adult">Over 25 yrs</button>
                             </div>
                         </div> 
                 </div>
@@ -32,8 +36,9 @@
         </div>
     </div>
 </div>
+<br>
 
-
+<!-- This table display the driver details that the user just entered.  -->
 <table class="table caption-top">
     <thead>
       <tr>
@@ -57,7 +62,7 @@
             </tr>
         {% endfor %}
     </tbody>
-
 </table>
+<!-- table -->
 
 {% endblock %}

@@ -2,9 +2,12 @@
 
 {% block content %}
 
+<!-- Amind Page -->
+
 <br>
 <h3>You sucessfully added an new driver!</h3>
 <br>
+
 
 <!-- This table shows the new row that user just added. -->
 <table class="table caption-top">
@@ -19,8 +22,6 @@
         <th scope="col">Car</th>
       </tr>
     </thead>
-
- 
     <tbody>
         {% for row in new_driver_list %}
             <tr>
@@ -35,8 +36,6 @@
 
 
 <!-- This button will direct user to a new form in  url_for('adddriverrun', and the DriverID will be the new_driver_id that user just entered. -->
-
 <button type="button" class="btn btn-info"><a href="{{ url_for('adddriverrun', new_driver_id=new_driver_id) }}">Add new runs</a></button>
-
 
 {% endblock %}

@@ -2,25 +2,32 @@
 
 {% block content %}
 
+
+<!-- Public user Page -->
+
+
+
 <br>
 <h2>All Drivers Overall Results</h2>
 <br>
+
+<!-- This table shows overall results including some combine process in mysql-->
 <table class="table caption-top">
     <br>
     <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">DriverName</th>
-        <th scope="col">Car</th>
-        <th scope="col">CourseA</th>
-        <th scope="col">CourseB</th>
-        <th scope="col">CourseC</th>
-        <th scope="col">CourseD</th>
-        <th scope="col">CourseE</th>
-        <th scope="col">CourseF</th>
-        <th scope="col">Overall</th>
-        <th scope="col"> </th>
-      </tr>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">DriverName</th>
+            <th scope="col">Car</th>
+            <th scope="col">CourseA</th>
+            <th scope="col">CourseB</th>
+            <th scope="col">CourseC</th>
+            <th scope="col">CourseD</th>
+            <th scope="col">CourseE</th>
+            <th scope="col">CourseF</th>
+            <th scope="col">Overall</th>
+            <th scope="col"> </th>
+        </tr>
     </thead>
     <tbody>
         {% for detail in overallList %}
@@ -40,6 +47,6 @@
         </tr>
         {% endfor %}
     </tbody>
-  </table>
+<!-- </table> -->
 
 {% endblock %}

@@ -2,10 +2,16 @@
 
 {% block content %}
 
-<br>
-<h2>Add Driver</h2>
-<!-- empty form for add driver -->
 
+<!-- Amind Page -->
+
+
+<br>
+<h2>Add Driver Data</h2>
+<br>
+
+
+<!-- empty form for adding new driver information -->
 <table class="table caption-top">
     <form method="POST" action="{{ url_for('adddriver') }}">
         <tr>
@@ -33,31 +39,41 @@
             </td>
         </tr>
 
-        <!-- if age_confirmation is yes, this part will be shown -->
-        {% if age_confirmation == "yes" %}
+
+        <!-- if age_confirmation is young, this part will be shown for adding 12-16 years old driver-->
+        {% if age_confirmation == "young" %}
         <tr>
-            <td>
-                <label for="date_of_birth">Date of Birth:</label>
-            </td>
-            <td>
-                <input type="text" name="date_of_birth" required>
-            </td>
+            <td><label for="dob">Date of Birth:</label></td>
+            <td><input type="date" id="dob" name="dob" /></td>
         </tr>
         <tr>
-            <td>
-                <label for="age">Age:</label>
-            </td>
-            <td>
-                <input type="text" name="age" required>
-            </td>
+            <td>Age:</td>
+            <td>automatically calculate(shown in new driver list)</td>
         </tr>
         <tr>
             <td>
                 <label for="caregiver">Caregiver:</label>
             </td>
             <td>
-                <input type="text" name="caregiver" required>
+                <select name="caregiver" id="caregiver" required>
+                    {% for driver in caregiverList %} 
+                        <option value="{{driver[0]}}">{{driver[0]}}</option>
+                    {% endfor %}
+                </select>
             </td>
+        </tr>
+        {% endif %}
+        <!-- part end -->
+
+        <!-- if age_confirmation is youngadult, this part will be shown for adding 17-25 years old driver-->
+        {% if age_confirmation == "youngadult" %}
+        <tr>
+            <td><label for="dob">Date of Birth:</label></td>
+            <td><input type="date" id="dob" name="dob" /></td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td>automatically calculate(shown in new driver list)</td>
         </tr>
         {% endif %}
         <!-- part end -->
@@ -85,8 +101,8 @@
             </td>
         </tr>
     </form>
+<!-- form end -->
+
 </table>
-
-
 
 {% endblock %}
