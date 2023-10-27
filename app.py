@@ -335,7 +335,6 @@ def searchrunlistfilter():
     driverRun_list = connection.fetchall()
     return render_template("searchrunlist.html", driverRun_list = driverRun_list,drivers=drivers)
 
-
 @app.route('/admin/editruns', methods=['GET', 'POST'])
 def editruns():
     if request.method == "GET":
@@ -385,6 +384,43 @@ def editruns():
             connection.execute("SELECT * FROM run;")
             run_result = connection.fetchall()
             return render_template("editruns.html", driverid=driverid,driver_result=driver_result, run_result=run_result)
+
+@app.route('/admin/editruns2', methods=['GET', 'POST'])
+def editruns2():
+    if request.method == "GET":
+        # get all the course table from database for select option 
+        connection = getCursor()
+        connection.execute("SELECT * FROM motorkhana.course;")
+        courseList = connection.fetchall()
+
+        print(courseList)
+        connection = getCursor()
+        connection.execute("SELECT * FROM run;")
+        course_result = connection.fetchall()
+        return render_template("editruns2.html",courseList=courseList,course_result=course_result)
+    
+    else:
+       
+        # get courseid from select bar
+        courseid = request.form.get('select_course')
+        print(type(courseid))
+        try:
+            connection = getCursor()
+            connection.execute("SELECT * FROM course;")
+            courseList = connection.fetchall()
+
+            connection = getCursor()
+            connection.execute("SELECT * FROM run where crs_id = %s;",(courseid,))
+            course_result = connection.fetchall()
+            return render_template("editruns2.html",courseid=courseid, course_result=course_result)
+
+        except:
+            connection = getCursor()
+            connection.execute("SELECT * FROM run;")
+            course_result = connection.fetchall()
+
+            return render_template("editruns2.html",courseid=courseid, course_result=course_result)
+            
 
 @app.route('/editrun_name', methods=["GET","POST"])
 def editrun_name():

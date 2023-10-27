@@ -11,7 +11,7 @@
 <br>
 
 <!-- This form also a table display as a table for user to edit. I hard-coded as running out of time. -->
-<form method="POST" action="/editrun_name" enctype="multipart/form-data">
+<form method="POST" action="/editrun_course" enctype="multipart/form-data">
     <table class="table caption-top"> 
             <thead>
                 <tr>
@@ -34,7 +34,7 @@
                     </td> 
                     <td>
                         <select name="courseid" required>
-                            <option value="{{ run_result[0][1] }}">{{ run_result[0][1] }}</option>
+                            <option value="{{ courseid }}">{{ courseid }}</option>
                         </select>
                     </td>
                     <td>
