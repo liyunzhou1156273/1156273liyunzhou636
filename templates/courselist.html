@@ -1,10 +1,17 @@
 {% extends "base.html" %}
+
 {% block content %}
 
-<h2>Course List</h2>
-<h3>current competition courses</h3>
 
-<!-- code to display list of courses-->
+<!-- Public user Page -->
+
+
+
+<br>
+<h2>All Courses</h2>
+<br>
+
+<!-- Here display the courselist page. The course's images have been displayed.-->
 <table>
     <tr>
         <th>Course</th>
@@ -14,10 +21,21 @@
     {% for course in course_list %}
         <tr>
             {% for field in course %}
-                <td>{{field}}</td>
+                <td>
+                    {% if loop.index ==3 %}<br>
+                    <img src="{{ url_for('static', filename=field) }}" alt="Map Graph">
+                    {% else %}
+                        {{field}}
+                    {% endif %}
+                </td>
             {% endfor %}
         </tr>
     {% endfor %}
 </table>
+<!-- table end -->
 
 {% endblock %}
+
+
+
+
