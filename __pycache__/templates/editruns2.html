@@ -13,7 +13,7 @@
     <p>
         <label>Select a course to edit runs</label>
         <select name="selected_course" id="selected_course" onchange="this.form.submit()">    <!-- The onchange attribute is very simple Javascript to automatically submit the form when the selection changes -->
-            <option>Select A Course</option>
+            <option>&lt;Select A Course&gt;</option>
                 {% for course in courseList %}
                 {% if course[0]==courseid %}
                 

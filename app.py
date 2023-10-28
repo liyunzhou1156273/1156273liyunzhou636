@@ -407,7 +407,7 @@ def editruns2():
         try:
             connection = getCursor()
             connection.execute("SELECT * FROM course;")
-            courseList = connection.fetchall()
+            getcourseid = connection.fetchall()
 
             connection = getCursor()
             connection.execute("SELECT * FROM run where crs_id = %s;",(courseid,))
@@ -416,14 +416,18 @@ def editruns2():
             
             
             
-            return render_template("editruns2.html",courseid=courseid, course_result=course_result)
+            return render_template("editruns2.html",courseid=courseid,courseList=getcourseid,course_result=course_result)
 
         except:
+            connection = getCursor()
+            connection.execute("SELECT * FROM course;")
+            getcourseid = connection.fetchall()
+
             connection = getCursor()
             connection.execute("SELECT * FROM run;")
             course_result = connection.fetchall()
 
-            return render_template("editruns2.html",courseid=courseid, course_result=course_result)
+            return render_template("editruns2.html",courseid=courseid,courseList=getcourseid,course_result=course_result)
             
 
 @app.route('/editrun_name', methods=["GET","POST"])
@@ -546,22 +550,31 @@ def editrun_course():
         driverID=int(driverID)
         courseID=request.form.get('courseid')
         runNumber=request.form.get('run_number')
+
+        #get value and check value type before passing it to sql
         Seconds=request.form.get('Seconds')
-        Cones=request.form.get('Cones')
-        WD=request.form.get('WD')
+        try:
+            Seconds = float(Seconds)
+        except ValueError:
+            Seconds = None
         
+        Cones=request.form.get('Cones')
+        try:
+            Cones = float(Cones)
+        except ValueError:
+            Cones = None
+
+        WD=request.form.get('WD')
+        try:
+            WD = float(WD)
+        except ValueError:
+            WD = None
+
         connection = getCursor()
         connection.execute("UPDATE `run` SET `seconds` = %s, `cones` = %s, `wd` = %s  WHERE (`dr_id` = %s) and (`crs_id` = %s) and (`run_num` = %s);",(Seconds,Cones,WD,driverID,courseID,runNumber,))
         return redirect('/admin/editruns2')
         
-        
-         
-    
-   
-
-
-
-
+ 
 
 @app.route('/admin/adddriver', methods=['GET', 'POST'])
 def adddriver():
