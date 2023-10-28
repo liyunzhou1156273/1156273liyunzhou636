@@ -402,7 +402,7 @@ def editruns2():
     else:
        
         # get courseid from select bar
-        courseid = request.form.get('select_course')
+        courseid = request.form.get('selected_course')
         print(type(courseid))
         try:
             connection = getCursor()
@@ -412,6 +412,10 @@ def editruns2():
             connection = getCursor()
             connection.execute("SELECT * FROM run where crs_id = %s;",(courseid,))
             course_result = connection.fetchall()
+           
+            
+            
+            
             return render_template("editruns2.html",courseid=courseid, course_result=course_result)
 
         except:
@@ -522,8 +526,38 @@ def editrun_name():
 
         return render_template("editrunbynamelist.html",run_result=run_result,new_run_list=new_run_list)
 
-# @app.route('/editrun_course', methods=["GET","POST"])
-# def editrun_course():
+@app.route('/editrun_course', methods=["GET","POST"])
+def editrun_course():
+    if  request.method == "GET":
+        # need get three parameters from the get url 
+        drivertID=request.args.get('driverID')
+        drivertID=int(drivertID)
+        courseID=request.args.get('courseID')
+        runNumber=request.args.get('runNumber')
+        runNumber=int(runNumber)
+        # put the three parameter to sql to grab the data of these three specific filed data 
+
+        connection = getCursor()
+        connection.execute("SELECT * FROM run where dr_id=%s and crs_id=%s and run_num=%s ;",(drivertID,courseID,runNumber,))
+        course_result = connection.fetchall()
+        return render_template("editrunbycourse.html",course_result=course_result)
+    else:
+        driverID=request.form.get('driverid')
+        driverID=int(driverID)
+        courseID=request.form.get('courseid')
+        runNumber=request.form.get('run_number')
+        Seconds=request.form.get('Seconds')
+        Cones=request.form.get('Cones')
+        WD=request.form.get('WD')
+        
+        connection = getCursor()
+        connection.execute("UPDATE `run` SET `seconds` = %s, `cones` = %s, `wd` = %s  WHERE (`dr_id` = %s) and (`crs_id` = %s) and (`run_num` = %s);",(Seconds,Cones,WD,driverID,courseID,runNumber,))
+        return redirect('/admin/editruns2')
+        
+        
+         
+    
+   
 
 
 
