@@ -569,7 +569,7 @@ def editrun_course():
             WD = None
 
         connection = getCursor()
-        connection.execute("UPDATE `run` SET `seconds` = %s, `cones` = %s, `wd` = %s  WHERE (`dr_id` = %s) and (`crs_id` = %s) and (`run_num` = %s);",(Seconds,Cones,WD,driverID,courseID,runNumber,))
+        connection.execute("UPDATE run SET seconds = %s, cones = %s, wd = %s  WHERE (dr_id = %s) and (crs_id = %s) and (run_num = %s);",(Seconds,Cones,WD,driverID,courseID,runNumber,))
         return redirect('/admin/editruns2')
 
 @app.route('/admin/adddriver', methods=['GET', 'POST'])
