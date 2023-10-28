@@ -9,25 +9,36 @@
 <br>
 <h2>Edit Runs For Your Course.</h2>
 <br>
-{{course_result}}
+
 
 <!-- This form also a table display as a form for user to edit. . -->
 <form method="POST" action="/editrun_course" enctype="multipart/form-data">
     <!-- drive id ,  course result, run number will be disabled to edit-->
-        <label for="driverID"> Driver ID </lable> 
-        <input  value={{course_result[0][0]}}  type="text" id="driverID" name="driverID" disabled> <br>
-        <label for="courseID"> course ID </lable> 
-        <input  value={{course_result[0][1]}}  type="text" id="courseID" name="courseID" disabled > <br>
-        <label for="runNumber"> Run Number </lable> 
-        <input  value={{course_result[0][2]}}  type="text" id="runNumber" name="runNumber" disabled> <br>
-<!-- user can put new data for seconds, cons, wrong directon -->
-        <label for="Seconds"> Seconds </lable> 
-        <input  value={{course_result[0][3]}}  type="text" id="Seconds" name="Seconds"> <br>
+    <tabble>
+        <tr>
+            <tb><label for="driverID"> Driver ID </lable> </tb>
+            <tb><input  value={{course_result[0][0]}}  type="text" id="driverID" name="driverID" disabled></tb>
 
-        <label for="Cones"> Cones</lable> 
-        <input  value={{course_result[0][4]}}  type="text" id="Cones" name="Cones"> <br>
-        <label for="WD"> Wrong Direction </lable> 
-        <input  value={{course_result[0][5]}} type="number"   id="WD" name="WD" > <br>
+            <tb><label for="courseID"> course ID </lable> </tb>
+            <tb><input  value={{course_result[0][1]}}  type="text" id="courseID" name="courseID" disabled ></tb>
+
+            <tb><label for="runNumber"> Run Number </lable></tb>  
+            <tb><input  value={{course_result[0][2]}}  type="text" id="runNumber" name="runNumber" disabled></tb>
+
+        <!-- user can put new data for seconds, cons, wrong directon -->
+
+           <tb><label for="Seconds"> Seconds </lable> </tb>
+           <tb><input  value={{course_result[0][3]}}  type="text" id="Seconds" name="Seconds"></tb>
+
+
+            <tb><label for="Cones"> Cones</lable> </tb>
+            <tb><input  value={{course_result[0][4]}}  type="text" id="Cones" name="Cones"></tb>
+
+
+            <tb><label for="WD"> Wrong Direction </lable> 
+            <tb><input  value={{course_result[0][5]}} type="number"   id="WD" name="WD" ></tb>
+        </tr>
+    </tabble>
 
         <!--hidden value from html but pass to form submit-->
         <input  value={{course_result[0][0]}}  type="hidden" id="driverid" name="driverid" > <br>
