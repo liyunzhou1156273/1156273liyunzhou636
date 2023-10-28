@@ -24,12 +24,14 @@
 
     <body>
         <nav>
-            <h1>Bankside Rakaia Motorkhana Mavens - Competition Event</h1>
-
+            <div style="text-align: center;">
+                <h1>Bankside Rakaia Motorkhana Mavens</h1>
+                <h3>Competition Event</h3>
+            </div>
             <!-- Below is the navbar shows menu including Home,Drivers,Courses,Overall results,Top5 Drivers Graph,Drivers Run Details -->
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="{{ url_for('home') }}">Home</a>
+                    <a class="navbar-brand" href="{{ url_for('home') }}">User Home</a>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -47,6 +49,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url_for('listalldetails') }}">Drivers Run Details</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Log out</a>
+                            </li> 
                         </ul>
                     </div>
                 </div>
