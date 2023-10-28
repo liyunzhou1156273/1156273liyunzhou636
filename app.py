@@ -18,7 +18,7 @@ app.static_url_path='/static'
 dbconn = None
 connection = None
 
-
+app.secret_key = 'your_secret_key'
 
 def getCursor():
     global dbconn
@@ -29,7 +29,6 @@ def getCursor():
     dbconn = connection.cursor()
     return dbconn
 
-app.secret_key = 'your_secret_key'
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -427,8 +426,7 @@ def editruns2():
             connection.execute("SELECT * FROM run;")
             course_result = connection.fetchall()
 
-            return render_template("editruns2.html",courseid=courseid,courseList=getcourseid,course_result=course_result)
-            
+            return render_template("editruns2.html",courseid=courseid,courseList=getcourseid,course_result=course_result)          
 
 @app.route('/editrun_name', methods=["GET","POST"])
 def editrun_name():
@@ -573,8 +571,6 @@ def editrun_course():
         connection = getCursor()
         connection.execute("UPDATE `run` SET `seconds` = %s, `cones` = %s, `wd` = %s  WHERE (`dr_id` = %s) and (`crs_id` = %s) and (`run_num` = %s);",(Seconds,Cones,WD,driverID,courseID,runNumber,))
         return redirect('/admin/editruns2')
-        
- 
 
 @app.route('/admin/adddriver', methods=['GET', 'POST'])
 def adddriver():
