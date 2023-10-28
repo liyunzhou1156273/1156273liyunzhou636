@@ -415,7 +415,7 @@ def editruns2():
     if request.method == "GET":
         # get the course table from database for select option as it has unique course_id
         connection = getCursor()
-        connection.execute("SELECT * FROM motorkhana.course;")
+        connection.execute("SELECT * FROM course;")
         courseList = connection.fetchall()
 
        
@@ -542,7 +542,7 @@ def editrun_name():
 
         
         connection = getCursor()
-        sql = "UPDATE motorkhana.run SET seconds = %s, cones = %s, wd = %s WHERE (dr_id = %s) and (crs_id = %s) and (run_num = %s)"
+        sql = "UPDATE run SET seconds = %s, cones = %s, wd = %s WHERE (dr_id = %s) and (crs_id = %s) and (run_num = %s)"
         data = [(current_seconds[0], current_cones[0], current_wd[0], current_Driverid[0], current_courseID[0], current_runNum[0]),
                 (current_seconds[1], current_cones[1], current_wd[1], current_Driverid[1], current_courseID[1], current_runNum[1]),
                 (current_seconds[2], current_cones[2], current_wd[2], current_Driverid[2], current_courseID[2], current_runNum[2]),
@@ -786,7 +786,7 @@ def adddriverrun(new_driver_id):
 
         #insert run data for each run.
         connection = getCursor()
-        sql = "INSERT INTO motorkhana.run (dr_id, crs_id, run_num, seconds, cones, wd) VALUES (%s, %s, %s, %s, %s, %s);"
+        sql = "INSERT INTO run (dr_id, crs_id, run_num, seconds, cones, wd) VALUES (%s, %s, %s, %s, %s, %s);"
 
         # Combine run data into a list of tuples.
         data = [(current_Driverid[0], current_courseID[0], current_runNum[0], current_seconds[0], current_cones[0], current_wd[0]),
