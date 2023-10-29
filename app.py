@@ -681,16 +681,19 @@ def adddriver():
                     #age is automatically calculated, also get caregiver value to check if there is age right for each range.
                     age = current_date.year - dob.year - ((current_date.month, current_date.day) < (dob.month, dob.day))
                     caregiver = request.form.get('caregiver')
-                    if 12 <=age <= 16 and caregiver is None:
-                        flash('This driver age does not match this range.')
-                        return redirect('/admin/adddriver')
-                    elif 17 <= age < 25 and caregiver is not None:                                         
-                        flash('This driver age does not match this range.')
-                        return redirect('/admin/adddriver')
+                    if 12 <= age <= 16 and (caregiver != "None" or caregiver is not None): 
+                            age=age
+                            caregiver=caregiver
+
+                    elif 17 <= age < 25 and (caregiver == "None" or caregiver is None):
+                            age=age    
+                            if caregiver == "" or "None":
+                                caregiver = None  
                     else:
-                        flash('This driver age does not match this range.')
+                        flash('You entered an invailid value')
                         return redirect('/admin/adddriver')
-                except ValueError:
+                        
+                except ValueError:  # in case user input an invalue date of birth
                         flash('You entered an invailid value')
                         return redirect('/admin/adddriver')
 
