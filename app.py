@@ -672,13 +672,27 @@ def adddriver():
                 surname = "None"
 
             dobget = request.form.get('dob')
-            print(dobget)
+            # check the date of birth range, and make sure input value in the right range.
             if  dobget is not None and dobget != "None":
-                dob = datetime.strptime(dobget, '%Y-%m-%d')
-                current_date = datetime.now()
+                try:
+                    dob = datetime.strptime(dobget, '%Y-%m-%d')
+                    current_date = datetime.now()
 
-                #age is automatically calculated
-                age = current_date.year - dob.year - ((current_date.month, current_date.day) < (dob.month, dob.day))
+                    #age is automatically calculated, also get caregiver value to check if there is age right for each range.
+                    age = current_date.year - dob.year - ((current_date.month, current_date.day) < (dob.month, dob.day))
+                    caregiver = request.form.get('caregiver')
+                    if 12 <=age <= 16 and caregiver is None:
+                        flash('This driver age does not match this range.')
+                        return redirect('/admin/adddriver')
+                    elif 17 <= age < 25 and caregiver is not None:                                         
+                        flash('This driver age does not match this range.')
+                        return redirect('/admin/adddriver')
+                    else:
+                        flash('This driver age does not match this range.')
+                        return redirect('/admin/adddriver')
+                except ValueError:
+                        flash('You entered an invailid value')
+                        return redirect('/admin/adddriver')
 
             else:
                 dob=dobget
@@ -686,12 +700,11 @@ def adddriver():
                 age=request.form.get('age')
                 if age == "" or "None":
                     age = None  
-             
-    
-            caregiver = request.form.get('caregiver')
-            if caregiver == "" or "None":
+                caregiver = request.form.get('caregiver')
+                if caregiver == "" or "None":
                     caregiver = None  
 
+    
             car = request.form.get('car')
         
             ## Check if the provided driver ID already exists in the database.
