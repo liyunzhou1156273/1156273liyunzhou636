@@ -103,12 +103,18 @@ web-app/
 # Assumptions and Design Decisions:
 
 ## Assumptions:
-- Route Hierarchy: The routes have been organized hierarchically to reflect the user roles. Regular user routes, such as /home, /listdrivers, and /rundetails, are distinct from admin routes, like /admin/listjuniordriver and /admin/editruns. This hierarchy allows for separation of user and admin functionalities.
-- Edit by course: I assume users can select a course, and the table below displays run details associated with the selected course. But at the beginning, I assume it needs to be edited for the whole course at a time. It seems not making sense.
+- Route Hierarchy: The routes have been organized hierarchically to reflect the user roles. Regular user routes, such as /home, /listdrivers, and /rundetails, are distinct from admin routes, like /admin/listjuniordriver and /admin/editruns. This hierarchy allows for the separation of user and admin functionalities.
+- Edit by course: I assume users can select a course, and the table below displays run details associated with the selected course. But at the beginning, I assume it needs to be edited for the whole course at a time. It seems not to make sense.
 - Edit by name: I assume that 12 runs for a specific driver can be edited and added at one time. This can be well displayed but it can be changed to edit or add one run at a time for a driver.
-- Add a new driver while the user forgets to add 12 new runs. I assume user still can add new runs while editing, so it can redirect to add new runs pages with value ID. 
+- Add a new driver while the user forgets to add 12 new runs. I assume the user still can add new runs while editing, so it can redirect to add new runs pages with value ID.
+- Login Button:  The assumption is that users need to log in, and there are different user roles (regular user and administrator).
 - Log Out Option: The navigation menu includes a "Log out" link, indicating that users can log out of their accounts. I assume this is a standard practice for user authentication and session management.
+- Age Confirmation: The form appears to have conditional sections based on the age confirmation. It's assumed that users must confirm their age range, and the form adapts accordingly.
+- I assume that users prefer a clean and organized layout that is easy to navigate, so background pictures are simple.
+- Assume a greeting should be needed when the user login on the first page.
+- Plotly Horizontal Bar Plot: It should be more visible to check overall results.
 - 
+-  
 
 ## Design Decisions:
 - Selected Driver Highlight in selecting driver in Driver Run Details(User page) : If the user has previously selected a driver and the page has been reloaded, the "if" condition checks whether the current driver in the loop matches the previously selected "driverid." If a match is found, that driver is set as the "selected" option in the dropdown menu. This ensures that the previously selected driver remains selected for a consistent user experience.
