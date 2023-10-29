@@ -165,7 +165,8 @@ CREATE TABLE IF NOT EXISTS car
 );
 ```
 ***o　Suppose logins were implemented. Why is it important for drivers and the club admin to access different routes? As part of your answer, give two specific examples of problems that could occur if all of the web app facilities were available to everyone.***
-I think 
+- If everyone is allowed access to these details could lead to privacy violations and potential misuse of personal data. Also, unauthorized users to access these functions can lead to data corruption, unauthorized modifications, and even data loss it is because they can edit driver records, add or modify runs, and manage the database. 
+- I assume if anyone can edit or manipulate this data, it could lead to inaccurate results, unfair competition, and disputes among club members. That means it potentially allows people to cheat. It can result in chaos, with inconsistent naming conventions, duplicated courses, or other data issues.
 
 # Image Sources:
 
